@@ -10,12 +10,16 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { PersonaComponent } from './components/persona/persona.component';
+import { PersonaFormComponent } from './components/persona/persona-form/persona-form.component';
+import { RegisterComponent } from './components/register/register.component';
 
 import { PersonaService } from './services/persona.service';
-import { PersonaFormComponent } from './components/persona/persona-form/persona-form.component';
 import { DireccionesService } from './services/direcciones.service';
 import { LogInterceptorService } from './services/log-interceptor.service';
 import { LeaveFormService } from './services/leave-form.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AccountService } from './services/account.service';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,8 @@ import { LeaveFormService } from './services/leave-form.service';
     CounterComponent,
     FetchDataComponent,
     PersonaComponent,
-    PersonaFormComponent
+    PersonaFormComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,18 +41,26 @@ import { LeaveFormService } from './services/leave-form.service';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'personas', component: PersonaComponent },
+      { path: 'personas', component: PersonaComponent, canActivate: [AuthGuardService] },
       { path: 'personas-agregar', component: PersonaFormComponent, canDeactivate: [LeaveFormService] },
       { path: 'personas-editar/:id', component: PersonaFormComponent, canDeactivate: [LeaveFormService] },
+      { path: 'register-login', component: RegisterComponent }
     ])
   ],
   providers: [
     PersonaService,
     DireccionesService,
-    LeaveFormService ,
+    LeaveFormService,
+    AuthGuardService,
+    AccountService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LogInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
       multi: true
     }
   ],

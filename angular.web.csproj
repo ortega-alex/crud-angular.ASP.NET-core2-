@@ -28,11 +28,13 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\models\Direccion.ts" />
     <None Remove="ClientApp\src\app\models\persona.ts" />
+    <None Remove="ClientApp\src\app\models\UserInfo.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\models\Direccion.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Persona.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\UserInfo.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

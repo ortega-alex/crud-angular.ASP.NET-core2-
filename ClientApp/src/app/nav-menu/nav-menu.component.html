@@ -28,9 +28,19 @@
               </a>
             </li>
 
-            <li [routerLinkActive]='["link-active"]'>
+            <li  *ngIf="estaLogueado()" [routerLinkActive]='["link-active"]'>
               <a [routerLink]='["/personas"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-th-list'></span> Persona
+                <span class='glyphicon glyphicon-user'></span> Persona
+              </a>
+            </li>
+            <li *ngIf="!estaLogueado()" [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/register-login"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-log-in'></span> Register / Login
+              </a>
+            </li>
+            <li *ngIf="estaLogueado()" [routerLinkActive]='["link-active"]'>
+              <a (click)='logout()'>
+                <span class='glyphicon glyphicon-log-out'></span> Logout
               </a>
             </li>
           </ul>

@@ -19,8 +19,12 @@
       <td>{{persona.nombre}}</td>
       <td>{{persona.fechaNacimiento | date : 'dd-MM-yyyy'}}</td>
       <td>
-        <button class="btn btn-primary" [routerLink]='["/personas-editar/" , persona.id]'>Editar</button>
-        <button class="btn btn-danger" (click)="delete(persona)">Borrar</button>
+        <button class="btn btn-primary" [routerLink]='["/personas-editar/" , persona.id]'>
+          <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+        <button class="btn btn-danger" (click)="delete(persona)">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
       </td>
     </tr>
   </tbody>

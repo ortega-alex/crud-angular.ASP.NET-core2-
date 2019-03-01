@@ -24,7 +24,7 @@ export class PersonaComponent implements OnInit {
   private cargarData(): void {
     this.personaService.getPeronas().subscribe((personas) => {
       this.personas = personas;
-    }, error => console.log("err: ", error.toString()));
+    }, error => console.log("err: ", error));
   }
 
   public delete(persona: Persona) {
